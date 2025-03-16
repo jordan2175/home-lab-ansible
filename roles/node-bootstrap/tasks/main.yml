@@ -5,12 +5,19 @@
 # Raspberry Pi EEPROM
 # ------------------------------------------------------------
 
-- name: Setup RPI EEPROM settings
+- name: Setup RPI EEPROM settings 1
   ansible.builtin.lineinfile:
-    regexp: '^RPI_EEPROM_USE_FLASHROM=1\nCM4_ENABLE_RPI_EEPROM_UPDATE=1'
+    regexp: '^RPI_EEPROM_USE_FLASHROM=1$'
     insertafter: EOF
     line: |
       RPI_EEPROM_USE_FLASHROM=1
+    path: /etc/default/rpi-eeprom-update
+
+- name: Setup RPI EEPROM settings 2
+  ansible.builtin.lineinfile:
+    regexp: '^CM4_ENABLE_RPI_EEPROM_UPDATE=1$'
+    insertafter: EOF
+    line: |
       CM4_ENABLE_RPI_EEPROM_UPDATE=1
     path: /etc/default/rpi-eeprom-update
 
@@ -28,26 +35,23 @@
     mode: '0644'
 
 - name: Setup /root/.bashrc file
-  ansible.builtin.lineinfile:
-    regexp: '^if .*bash\.bashrc\.local.*\n.*\nfi'
-    insertafter: EOF
-    line: |
-
+  ansible.builtin.blockinfile:
+    path: /root/.bashrc
+    block: |
       if [ -f /etc/bash.bashrc.local ]; then
           . /etc/bash.bashrc.local
       fi
-    path: /root/.bashrc
+    marker: "# {mark} ANSIBLE MANAGED BLOCK"
 
 - name: Setup /etc/default/skel/.bashrc file
-  ansible.builtin.lineinfile:
-    regexp: '^if .*bash\.bashrc\.local.*\n.*\nfi'
-    insertafter: EOF
-    line: |
-
+  ansible.builtin.blockinfile:
+    path: /etc/skel/.bashrc
+    block: |
       if [ -f /etc/bash.bashrc.local ]; then
           . /etc/bash.bashrc.local
       fi
-    path: /etc/skel/.bashrc
+    marker: "# {mark} ANSIBLE MANAGED BLOCK"
+
 
 
 # ------------------------------------------------------------
