@@ -17,8 +17,7 @@
   ansible.builtin.lineinfile:
     regexp: '^CM4_ENABLE_RPI_EEPROM_UPDATE=1$'
     insertafter: EOF
-    line: |
-      CM4_ENABLE_RPI_EEPROM_UPDATE=1
+    line: CM4_ENABLE_RPI_EEPROM_UPDATE=1
     path: /etc/default/rpi-eeprom-update
 
 
