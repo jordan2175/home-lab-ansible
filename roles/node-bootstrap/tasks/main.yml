@@ -30,7 +30,6 @@
   ansible.builtin.lineinfile:
     insertafter: EOF
     line: |
-
       if [ -f /etc/bash.bashrc.local ]; then
           . /etc/bash.bashrc.local
       fi
@@ -40,7 +39,6 @@
   ansible.builtin.lineinfile:
     insertafter: EOF
     line: |
-
       if [ -f /etc/bash.bashrc.local ]; then
           . /etc/bash.bashrc.local
       fi

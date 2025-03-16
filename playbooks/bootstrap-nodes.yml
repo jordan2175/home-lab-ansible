@@ -16,6 +16,9 @@
   become: true
   remote_user: root
 
+
+# Using private will make sure the text entered is not echoed back to the screen
+# The encrypt sha512_crypt funciton is the same as the mkpasswd command
   vars_prompt:
     - name: root_password
       prompt: "new password for root"
