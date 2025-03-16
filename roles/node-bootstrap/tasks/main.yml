@@ -7,6 +7,7 @@
 
 - name: Setup RPI EEPROM settings
   ansible.builtin.lineinfile:
+    regexp: '^\s*RPI_EEPROM_USE_FLASHROM=1'
     insertafter: EOF
     line: |
       RPI_EEPROM_USE_FLASHROM=1
@@ -28,6 +29,7 @@
 
 - name: Setup /root/.bashrc file
   ansible.builtin.lineinfile:
+    regexp: '^\s*if [ -f \/etc\/bash.bashrc.local ]'
     insertafter: EOF
     line: |
       if [ -f /etc/bash.bashrc.local ]; then
@@ -37,6 +39,7 @@
 
 - name: Setup /etc/default/skel/.bashrc file
   ansible.builtin.lineinfile:
+    regexp: '^\s*if [ -f \/etc\/bash.bashrc.local ]'
     insertafter: EOF
     line: |
       if [ -f /etc/bash.bashrc.local ]; then
@@ -75,7 +78,7 @@
     shell: /bin/bash 
     state: present
 
-- name: Add ansible's public key to all nodes
+- name: Add ansible's public key to the nodes
   ansible.posix.authorized_key: 
     user: ansible
     # Look up key on the controller and copy it to the node
@@ -110,7 +113,7 @@
     shell: /bin/bash 
     state: present
 
-- name: Add my user's public key to all nodes
+- name: Add my public key to the node
   ansible.posix.authorized_key: 
     user: jordan
     # Look up key on the controller and copy it to the node
