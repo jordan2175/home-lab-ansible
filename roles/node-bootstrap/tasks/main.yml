@@ -7,7 +7,7 @@
 
 - name: Setup RPI EEPROM settings
   ansible.builtin.lineinfile:
-    regexp: '^\s*RPI_EEPROM_USE_FLASHROM=1'
+    regexp: '^RPI_EEPROM_USE_FLASHROM=1\nCM4_ENABLE_RPI_EEPROM_UPDATE=1'
     insertafter: EOF
     line: |
       RPI_EEPROM_USE_FLASHROM=1
@@ -29,9 +29,10 @@
 
 - name: Setup /root/.bashrc file
   ansible.builtin.lineinfile:
-    regexp: '^\s*if [ -f \/etc\/bash.bashrc.local ]'
+    regexp: '^if .*bash\.bashrc\.local.*\n.*\nfi'
     insertafter: EOF
     line: |
+
       if [ -f /etc/bash.bashrc.local ]; then
           . /etc/bash.bashrc.local
       fi
@@ -39,9 +40,10 @@
 
 - name: Setup /etc/default/skel/.bashrc file
   ansible.builtin.lineinfile:
-    regexp: '^\s*if [ -f \/etc\/bash.bashrc.local ]'
+    regexp: '^if .*bash\.bashrc\.local.*\n.*\nfi'
     insertafter: EOF
     line: |
+
       if [ -f /etc/bash.bashrc.local ]; then
           . /etc/bash.bashrc.local
       fi
