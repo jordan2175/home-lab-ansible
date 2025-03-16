@@ -24,7 +24,7 @@
 # ------------------------------------------------------------
 # SSH Config Known Hosts
 # ------------------------------------------------------------
--name: Setup SSH known_hosts to not hash ips 
+- name: Setup SSH known_hosts to not hash ips 
   ansible.builtin.copy:
     src: ssh-config
     dest: /etc/ssh/ssh_config.d/ansible
