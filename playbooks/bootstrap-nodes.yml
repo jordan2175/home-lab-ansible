@@ -2,14 +2,8 @@
 
 # Copyright 2025 Bret Jordan, All rights reserved.
 
-# ------------------------------------------------------------
-# Step 0: Test connectivity 
-# ------------------------------------------------------------
-# 1. Login to each system with the existing account's username
-#    to accept the SSH host key 
-#
-# How to run:
-# ansible-playbook playbooks/bootstrap/bootstrap-node-stage-1.yml
+# How to run (as root):
+# ansible-playbook playbooks/bootstrap/bootstrap-nodes.yml
 
 
 - hosts: bootstrap
@@ -18,8 +12,9 @@
   remote_user: root
 
 
-# Using private will make sure the text entered is not echoed back to the screen
-# The encrypt sha512_crypt funciton is the same as the mkpasswd command
+# Using the key of private will make sure the text entered is not echoed back to
+# the screen. The encrypt sha512_crypt funciton is the same as the mkpasswd
+# command
   vars_prompt:
     - name: root_password
       prompt: "new password for root"
