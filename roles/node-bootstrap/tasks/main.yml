@@ -34,6 +34,23 @@
 
 
 # ------------------------------------------------------------
+# Netplan
+# ------------------------------------------------------------
+- name: Copy netplan file 
+  ansible.builtin.copy:
+    src: 01-cluster.yaml
+    dest: /etc/netplan
+    owner: root
+    group: root
+    mode: '0600'
+
+- name: Remove /etc/netplan/50-cloud-init.yaml
+  ansible.builtin.file:
+    path: /etc/netplan/50-cloud-init.yaml
+    state: absent
+
+
+# ------------------------------------------------------------
 # Bashrc Setup
 # ------------------------------------------------------------
 
