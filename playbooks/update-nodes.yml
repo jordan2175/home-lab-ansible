@@ -14,9 +14,12 @@
   become: true
   tasks:
 
-  - name: update and upgrade all nodes in cluster
+  - name: update all nodes in cluster
     ansible.builtin.apt:
       update_cache: true
+
+  - name: upgrade all nodes in cluster
+    ansible.builtin.apt:
       upgrade: dist
 
   - name: check reboot status
